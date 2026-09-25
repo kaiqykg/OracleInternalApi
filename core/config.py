@@ -20,7 +20,7 @@ ORACLE_CLIENT_PATH = str(BASE_DIR / "oracle" / "instantclient_21_23")
 
 # Configurações do Serviço
 HOST: str = os.getenv("HOST", "0.0.0.0")
-PORT: int = int(os.getenv("PORT", "3001"))
+PORT: int = int(os.getenv("PORT", "3005"))
 API_KEY: str = os.getenv("API_KEY", "pcm_oracle_internal_key_2026")
 
 # Credenciais Oracle
