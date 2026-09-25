@@ -1,0 +1,12 @@
+@echo off
+title OracleInternalApi - PCM Gateway
+cd /d "%~dp0"
+echo ========================================================
+echo    Iniciando OracleInternalApi (FastAPI + Thick Mode)
+echo ========================================================
+python -m uvicorn main:app --host 0.0.0.0 --port 3001 --reload
+if %errorlevel% neq 0 (
+    echo.
+    echo [ERRO] O servico encerrou com erro %errorlevel%.
+    pause
+)

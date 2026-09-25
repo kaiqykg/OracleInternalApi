@@ -1,0 +1,43 @@
+# ========================================================
+# 1. Segredos, Envs e Chaves de API (Blindagem Total)
+# ========================================================
+.env
+.env*
+*.env
+oracleDb secret/
+*secret*
+*.key
+*.token
+
+# Permitir apenas o template publico
+!*.env.example
+
+# ========================================================
+# 2. Binarios Pesados e DLLs (Limite de 100MB do GitHub)
+# ========================================================
+oracle/
+*.dll
+*.sym
+*.jar
+*.zip
+*.exe
+*.whl
+
+# ========================================================
+# 3. Python Caches e Ambientes Virtuais
+# ========================================================
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+.pytest_cache/
+.coverage
+
+# ========================================================
+# 4. Logs e Arquivos Temporarios de IDE
+# ========================================================
+*.log
+.vscode/
+.idea/
