@@ -1,6 +1,7 @@
 import time
 import datetime
 import decimal
+import re
 import oracledb
 from typing import Any
 from core.oracle_pool import get_db_connection
@@ -25,7 +26,14 @@ def serialize_oracle_val(val: Any) -> Any:
 def execute_oracle_query(sql: str, params: Any, output_format: str) -> dict:
     """Executa a query SQL e retorna os dados no formato solicitado ('records' ou 'table')."""
     clean_sql = sql.strip().rstrip(";")
-    query_params = params if params is not None else {}
+    
+    # Se params for um dicionário, filtra para manter apenas as chaves presentes como ':bind_var'
+    # no comando SQL, prevenindo o erro ORA-01036 (illegal variable name/number).
+    if isinstance(params, dict):
+        bind_names = set(re.findall(r":([a-zA-Z0-9_]+)", clean_sql))
+        query_params = {k: v for k, v in params.items() if k in bind_names}
+    else:
+        query_params = params if params is not None else {}
 
     start_time = time.perf_counter()
     with get_db_connection() as conn:
